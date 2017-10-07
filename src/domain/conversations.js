@@ -15,22 +15,46 @@ const createConversation = (users, roomId) => {
     return conversationInstance.save(err => {
         if (err)
             console.error(`Conversation instance failed to save: ${err}`);
-    })
+    });
 }
 
 const getConversationsByUserId = (user, roomId) => {
-    return ConversationModel.find({ roomId: roomId, users: { $elemMatch : {_id: user._id}}}).then(user => user);
+    return ConversationModel
+        .find({ roomId: roomId, users: { $elemMatch : {_id: user._id}}})
+        .then(user => user);
+}
+
+const getConversationById = (roomId, convoId) => {
+    return ConversationModel
+        .find({ roomId: roomId, _id: convoId})
+        .then(convo => convo);
+}
+
+const readConversation = async (user, conversationId) => {
+    const conversation = await ConversationModel.findById(conversationId);
+
+    conversation.users = conversation.users.map(u => {
+        if(user._id.equals(u._id))
+            u.unreadMessages = 0;
+        return u;
+    });
+
+    return conversation.save(err => {
+        if (err)
+            console.error(`Error when updating unread messages ${err}`);
+    })
 }
 
 const sendMessage = async (conversationId, user, message) => {
     const conversation = await ConversationModel.findById(conversationId);
 
     conversation.messages.push({
-        content: message
+        content: message,
+        createdBy: user
     });
 
     conversation.users = conversation.users.map(u => {
-        if(u._id !== user._id)
+        if(!u._id.equals(user._id))
             u.unreadMessages += 1;
         return u;
     });
@@ -41,4 +65,10 @@ const sendMessage = async (conversationId, user, message) => {
     });
 }
 
-export { createConversation, sendMessage, getConversationsByUserId }
+export { 
+    createConversation, 
+    sendMessage, 
+    getConversationsByUserId, 
+    getConversationById,
+    readConversation
+}

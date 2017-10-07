@@ -1,6 +1,12 @@
 import { Router } from 'express';
 import { getRoomById, createRoom, joinRoom, leaveRoom, getAllRooms } from './domain/rooms';
-import { createConversation, getConversationsByUserId } from './domain/conversations';
+import { 
+  createConversation, 
+  getConversationsByUserId, 
+  getConversationById, 
+  sendMessage,
+  readConversation
+} from './domain/conversations';
 import { getUserFromAuthToken, getUsersById } from './domain/users';
 
 const routes = Router();
@@ -48,6 +54,25 @@ routes.get('/rooms/:id/conversations', (req, res) => {
   getUserFromAuthToken(req.token).then(user => {
     getConversationsByUserId(user, req.params.id)
       .then(conversations => res.json(conversations));
+  });
+});
+
+routes.get('/rooms/:id/conversations/:conversationId', (req, res) => {
+  getConversationById(req.params.id, req.params.conversationId)
+    .then(convo => res.json(convo));
+});
+
+routes.post('/rooms/:id/conversations/:conversationId/messages', (req, res) => {
+  getUserFromAuthToken(req.token).then(user => {
+    sendMessage(req.params.conversationId, user, req.body.message)
+      .then(convo => res.json(convo));
+  });
+});
+
+routes.post('/rooms/:id/conversations/:conversationId/read', (req, res) => {
+  getUserFromAuthToken(req.token).then(user => {
+    readConversation(user, req.params.conversationId)
+      .then(convo => res.json(convo));
   })
 })
 

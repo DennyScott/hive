@@ -7,7 +7,7 @@ const ConversationSchema = new Schema({
     messages: [{
         content: String,
         createdAt: {type: Date, default: Date.now},
-        createdBy: {firname: String, lastname: String, username: String, _id: Schema.Types.ObjectId, email: String}
+        createdBy: {firstname: String, lastname: String, username: String, _id: Schema.Types.ObjectId, email: String}
     }],
     createdAt: { type: Date, default: Date.now }
 });
