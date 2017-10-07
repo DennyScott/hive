@@ -1,13 +1,9 @@
 import {OAuthTokensModel, OAuthClientsModel, OAuthUsersModel} from '../data/auth';
 
 const registerUser = (username, password, email, firstname, lastname) => {
-  console.log(username);
-  console.log(password);
   if(!isString(username) || !isString(password)){
     return;
   }
-
-  console.log('we are here');
 
   const userInstance = new OAuthUsersModel({
     email,
