@@ -12,6 +12,4 @@ const RoomSchema = new Schema({
 });
 
 const RoomModel = mongoose.model('RoomModel', RoomSchema)
-
-
 export { RoomModel }
