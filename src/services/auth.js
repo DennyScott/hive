@@ -1,4 +1,4 @@
-import {OAuthTokensModel, OAuthClientsModel, OAuthUsersModel} from '../data/auth';
+import {OAuthTokensModel, OAuthClientsModel, OAuthUsersModel} from '../models/auth';
 
 const registerUser = (username, password, email, firstname, lastname) => {
   if(!isString(username) || !isString(password)){

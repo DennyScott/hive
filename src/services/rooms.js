@@ -1,4 +1,4 @@
-import { RoomModel } from '../data/rooms';
+import { RoomModel } from '../models/rooms';
 
 /**
  * Create a new Room

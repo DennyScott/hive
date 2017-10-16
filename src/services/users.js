@@ -1,4 +1,4 @@
-import { OAuthTokensModel, OAuthUsersModel } from '../data/auth';
+import { OAuthTokensModel, OAuthUsersModel } from '../models/auth';
 
 const getUserFromAuthToken = authToken => {
   //Get userId here, then look up value in users model. Only return needed data (not password)
