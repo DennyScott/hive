@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import { getRoomById, createRoom, joinRoom, leaveRoom, getAllRooms } from './domain/rooms';
+import { getRoomById, createRoom, joinRoom, leaveRoom, getAllRooms } from './services/rooms';
 import { 
   createConversation, 
   getConversationsByUserId, 
   getConversationById, 
   sendMessage,
   readConversation
-} from './domain/conversations';
-import { getUserFromAuthToken, getUsersById } from './domain/users';
+} from './services/conversations';
+import { getUserFromAuthToken, getUsersById } from './services/users';
 
 const routes = Router();
 

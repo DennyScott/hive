@@ -1,12 +1,12 @@
-import { getUserFromAuthToken } from './domain/users';
-import * as authModel from './domain/auth';
+import { getUserFromAuthToken } from './services/users';
+import * as authModel from './services/auth';
 import OAuth2Server from'oauth2-server';
 import { 
   getConversationById, 
   getConversationsByUserId, 
   sendMessage,
   createConversation
-} from './domain/conversations';
+} from './services/conversations';
 
 
 const Request = OAuth2Server.Request;

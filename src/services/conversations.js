@@ -1,4 +1,4 @@
-import { ConversationModel } from '../data/conversations';
+import { ConversationModel } from '../models/conversations';
 
 const createConversation = (users, roomId) => {
     users = users.map(user => {

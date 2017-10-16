@@ -7,9 +7,9 @@ import http from 'http';
 import bearerToken from 'express-bearer-token';
 import { init } from './socket';
 import socket from 'socket.io';
-import { connectMongoose } from './data';
+import { connectMongoose } from './models';
 import OAuthServer from 'express-oauth-server';
-import * as authModel from './domain/auth';
+import * as authModel from './services/auth';
 
 const app = express();
 app.disable('x-powered-by');
